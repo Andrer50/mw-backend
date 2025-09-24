@@ -8,6 +8,9 @@ import lombok.*;
 import mweb.mw_backend.enumeration.ProductCondition;
 import mweb.mw_backend.enumeration.ProductStatus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -48,4 +51,13 @@ public class Product {
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private DetailProduct detailProduct;
+
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Inventory inventory;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Wishlist> wishlists = new ArrayList<>();
 }

@@ -25,4 +25,21 @@ public class PurchaseCart {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PurchaseCartItem> purchaseCartItems = new ArrayList<>();
+
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = true;
+
+    // Método para calcular el total del carrito
+    public Double calculateTotal() {
+        return purchaseCartItems.stream()
+                .mapToDouble(item -> item.getProduct().getDetailProduct().getPrice() * item.getQuantity())
+                .sum();
+    }
+
+    // Método para obtener el número total de items
+    public Integer getTotalItems() {
+        return purchaseCartItems.stream()
+                .mapToInt(PurchaseCartItem::getQuantity)
+                .sum();
+    }
 }
