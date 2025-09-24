@@ -25,4 +25,9 @@ public class PurchaseCartItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     private PurchaseCart cart;
+
+    // Método para calcular el subtotal del item
+    public Double getSubtotal() {
+        return (double) (product.getDetailProduct().getPrice() * quantity);
+    }
 }

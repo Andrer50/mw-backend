@@ -47,4 +47,12 @@ public class Order {
     @JoinColumn(name = "shipment_id", referencedColumnName = "id")
     private Shipment shipment;
 
+    // Relación con cupón (opcional)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
+
+    @Column(name = "discount_amount")
+    private Double discountAmount = 0.0;
+
 }
