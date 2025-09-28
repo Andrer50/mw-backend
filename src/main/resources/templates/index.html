@@ -7,26 +7,432 @@
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0" />
-		<title>ElectroStore - E-commerce de Productos Electrónicos</title>
+		<title>MODATEC - E-commerce de Productos Electrónicos</title>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 			rel="stylesheet" />
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
 			rel="stylesheet" />
+
+		<style>
+			/* Variables de colores personalizadas */
+			:root {
+				--primary-color: #0d6efd;
+				--secondary-color: #6c757d;
+				--success-color: #198754;
+				--info-color: #0dcaf0;
+				--warning-color: #ffc107;
+				--danger-color: #dc3545;
+				--light-color: #f8f9fa;
+				--dark-color: #212529;
+			}
+
+			/* Mejoras generales */
+			body {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				line-height: 1.6;
+			}
+
+			/* Navbar mejorado */
+			.navbar {
+				box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+				padding: 1rem 0;
+				background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
+			}
+
+			.navbar-brand {
+				font-weight: 700;
+				font-size: 1.8rem;
+				color: white !important;
+			}
+
+			.navbar-nav .nav-link {
+				font-weight: 500;
+				color: rgba(255, 255, 255, 0.9) !important;
+				margin: 0 0.5rem;
+				padding: 0.5rem 1rem !important;
+				border-radius: 25px;
+				transition: all 0.3s ease;
+			}
+
+			.navbar-nav .nav-link:hover {
+				background: rgba(255, 255, 255, 0.2);
+				color: white !important;
+				transform: translateY(-2px);
+			}
+
+			.dropdown-menu {
+				border: none;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+				border-radius: 10px;
+				margin-top: 10px;
+			}
+
+			.dropdown-item {
+				padding: 0.75rem 1.5rem;
+				transition: all 0.3s ease;
+			}
+
+			.dropdown-item:hover {
+				background: var(--primary-color);
+				color: white;
+				transform: translateX(5px);
+			}
+
+			/* Hero Section */
+			.hero-section {
+				background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 50%, var(--info-color) 100%);
+				color: white;
+				padding: 6rem 0;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.hero-section::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+					repeat;
+				animation: float 20s infinite linear;
+			}
+
+			@keyframes float {
+				0% {
+					transform: translateX(0px);
+				}
+				100% {
+					transform: translateX(-60px);
+				}
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+			}
+
+			.hero-title {
+				font-size: 3.5rem;
+				font-weight: 700;
+				margin-bottom: 1.5rem;
+				animation: slideInUp 1s ease-out;
+			}
+
+			.hero-subtitle {
+				font-size: 1.25rem;
+				margin-bottom: 2rem;
+				opacity: 0.95;
+				animation: slideInUp 1s ease-out 0.2s both;
+			}
+
+			@keyframes slideInUp {
+				from {
+					opacity: 0;
+					transform: translateY(50px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Botones mejorados */
+			.btn {
+				border-radius: 50px;
+				padding: 0.75rem 2rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				transition: all 0.3s ease;
+				border: 2px solid transparent;
+			}
+
+			.btn-primary {
+				background: var(--warning-color);
+				border-color: var(--warning-color);
+				color: var(--dark-color);
+			}
+
+			.btn-primary:hover {
+				background: transparent;
+				border-color: var(--warning-color);
+				color: var(--warning-color);
+				transform: translateY(-3px);
+				box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
+			}
+
+			.btn-outline-light:hover {
+				background: white;
+				color: var(--primary-color);
+				transform: translateY(-3px);
+				box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+			}
+
+			.btn-outline-primary {
+				border-width: 2px;
+			}
+
+			.btn-outline-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+			}
+
+			/* Cards mejoradas */
+			.card {
+				border: none;
+				border-radius: 15px;
+				box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+				overflow: hidden;
+			}
+
+			.card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+			}
+
+			.category-card {
+				background: linear-gradient(145deg, #ffffff, #f8f9fa);
+				height: 100%;
+			}
+
+			.category-card .card-body {
+				padding: 2.5rem 2rem;
+			}
+
+			.category-icon {
+				background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				transition: transform 0.3s ease;
+			}
+
+			.category-card:hover .category-icon {
+				transform: scale(1.1) rotate(5deg);
+			}
+
+			.product-card {
+				position: relative;
+			}
+
+			.product-card .card-img-top {
+				height: 250px;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+
+			.product-card:hover .card-img-top {
+				transform: scale(1.05);
+			}
+
+			.price-badge {
+				background: linear-gradient(135deg, var(--success-color), #20c997);
+				color: white;
+				padding: 0.5rem 1rem;
+				border-radius: 25px;
+				font-weight: 700;
+				font-size: 1.1rem;
+				display: inline-block;
+			}
+
+			/* Secciones */
+			.section-padding {
+				padding: 5rem 0;
+			}
+
+			.section-title {
+				font-size: 3rem;
+				font-weight: 700;
+				margin-bottom: 3rem;
+				position: relative;
+				display: inline-block;
+			}
+
+			.section-title::after {
+				content: '';
+				position: absolute;
+				bottom: -15px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 4px;
+				background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+				border-radius: 2px;
+			}
+
+			/* Backgrounds alternados */
+			.bg-gradient-light {
+				background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+			}
+
+			.bg-gradient-primary {
+				background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+			}
+
+			/* Footer mejorado */
+			.footer {
+				background: linear-gradient(135deg, var(--dark-color) 0%, #495057 100%);
+				color: white;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.footer::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 0v40M0 20h40'/%3E%3C/g%3E%3C/svg%3E")
+					repeat;
+				animation: rotate 60s linear infinite;
+			}
+
+			@keyframes rotate {
+				from {
+					transform: rotate(0deg);
+				}
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+			.footer-content {
+				position: relative;
+				z-index: 2;
+			}
+
+			.footer a {
+				color: rgba(255, 255, 255, 0.8);
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.footer a:hover {
+				color: var(--warning-color);
+				transform: translateX(5px);
+			}
+
+			.social-links a {
+				display: inline-block;
+				width: 45px;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				border-radius: 50%;
+				background: rgba(255, 255, 255, 0.1);
+				margin: 0 5px;
+				transition: all 0.3s ease;
+			}
+
+			.social-links a:hover {
+				background: var(--warning-color);
+				color: var(--dark-color);
+				transform: translateY(-5px);
+			}
+
+			/* Badges mejorados */
+			.badge {
+				padding: 0.5rem 1rem;
+				border-radius: 25px;
+				font-size: 0.875rem;
+			}
+
+			/* Animaciones adicionales */
+			.fade-in {
+				animation: fadeIn 1s ease-out;
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.hero-title {
+					font-size: 2.5rem;
+				}
+
+				.section-title {
+					font-size: 2.5rem;
+				}
+
+				.btn {
+					padding: 0.6rem 1.5rem;
+					font-size: 0.9rem;
+				}
+
+				.hero-section {
+					padding: 4rem 0;
+				}
+
+				.section-padding {
+					padding: 3rem 0;
+				}
+			}
+
+			@media (max-width: 576px) {
+				.hero-title {
+					font-size: 2rem;
+				}
+
+				.section-title {
+					font-size: 2rem;
+				}
+			}
+
+			/* Loading states */
+			.loading {
+				position: relative;
+				overflow: hidden;
+			}
+
+			.loading::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+				animation: loading 2s infinite;
+			}
+
+			@keyframes loading {
+				0% {
+					left: -100%;
+				}
+				100% {
+					left: 100%;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<!-- Navbar -->
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 			<div class="container">
 				<a
 					class="navbar-brand"
 					href="/">
-					<i class="bi bi-lightning-charge"></i> ElectroStore
+					<i class="bi bi-cpu-fill"></i> MODATEC
 				</a>
 
 				<button
-					class="navbar-toggler"
+					class="navbar-toggler border-0"
 					type="button"
 					data-bs-toggle="collapse"
 					data-bs-target="#navbarNav">
@@ -40,9 +446,9 @@
 						<li class="nav-item">
 							<a
 								class="nav-link"
-								href="/products"
-								>Productos</a
-							>
+								href="/products">
+								<i class="bi bi-grid me-1"></i>Productos
+							</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a
@@ -50,14 +456,16 @@
 								href="#"
 								role="button"
 								data-bs-toggle="dropdown">
-								Categorías
+								<i class="bi bi-list me-1"></i>Categorías
 							</a>
 							<ul class="dropdown-menu">
 								<li th:each="category : ${categories}">
 									<a
 										class="dropdown-item"
 										th:href="@{/web/products/category/{id}(id=${category.id})}"
-										th:text="${category.name}"></a>
+										th:text="${category.name}">
+										<i class="bi bi-arrow-right me-2"></i>
+									</a>
 								</li>
 							</ul>
 						</li>
@@ -68,22 +476,23 @@
 							<a
 								class="nav-link"
 								href="/web/cart">
-								<i class="bi bi-cart"></i> Carrito
+								<i class="bi bi-bag me-1"></i>Carrito
+								<span class="badge bg-warning text-dark ms-1">0</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a
 								class="nav-link"
-								href="/auth/login"
-								>Iniciar Sesión</a
-							>
+								href="/auth/login">
+								<i class="bi bi-person me-1"></i>Iniciar Sesión
+							</a>
 						</li>
 						<li class="nav-item">
 							<a
 								class="nav-link"
-								href="/auth/register"
-								>Registrarse</a
-							>
+								href="/auth/register">
+								<i class="bi bi-person-plus me-1"></i>Registrarse
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -91,50 +500,89 @@
 		</nav>
 
 		<!-- Hero Section -->
-		<section class="bg-light py-5">
+		<section class="hero-section">
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-lg-6">
-						<h1 class="display-4 fw-bold">Los Mejores Productos Electrónicos</h1>
-						<p class="lead">Encuentra la última tecnología en computadoras, smartphones, tablets y más.</p>
-						<a
-							href="/products"
-							class="btn btn-primary btn-lg"
-							>Ver Productos</a
-						>
+						<div class="hero-content">
+							<h1 class="hero-title">Tecnología que <span class="text-warning">Transforma</span></h1>
+							<p class="hero-subtitle">
+								Descubre los mejores productos electrónicos con la calidad y innovación que mereces. MODATEC, tu aliado
+								tecnológico.
+							</p>
+							<div class="d-flex gap-3 flex-wrap">
+								<a
+									href="/products"
+									class="btn btn-primary btn-lg">
+									<i class="bi bi-rocket-takeoff me-2"></i>Explorar Productos
+								</a>
+								<a
+									href="#categories"
+									class="btn btn-outline-light btn-lg">
+									<i class="bi bi-arrow-down me-2"></i>Ver Categorías
+								</a>
+							</div>
+
+							<!-- Stats -->
+							<div class="row mt-5">
+								<div class="col-4 text-center">
+									<h3 class="fw-bold text-warning">500+</h3>
+									<small class="text-light">Productos</small>
+								</div>
+								<div class="col-4 text-center">
+									<h3 class="fw-bold text-warning">50K+</h3>
+									<small class="text-light">Clientes</small>
+								</div>
+								<div class="col-4 text-center">
+									<h3 class="fw-bold text-warning">99%</h3>
+									<small class="text-light">Satisfacción</small>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-6 text-center">
 						<img
-							src="https://via.placeholder.com/500x300/007bff/ffffff?text=ElectroStore"
-							class="img-fluid rounded"
-							alt="ElectroStore" />
+							src="https://via.placeholder.com/600x450/0d6efd/ffffff?text=MODATEC+TECH"
+							class="img-fluid rounded-4 shadow-lg"
+							alt="MODATEC Technology"
+							style="max-width: 100%" />
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Categorías -->
-		<section class="py-5">
+		<section
+			class="section-padding bg-gradient-light"
+			id="categories">
 			<div class="container">
-				<h2 class="text-center mb-5">Explora por Categorías</h2>
-				<div class="row">
+				<div class="text-center mb-5">
+					<h2 class="section-title">Nuestras Categorías</h2>
+					<p class="lead text-muted">Explora nuestra amplia gama de productos tecnológicos</p>
+				</div>
+
+				<div class="row g-4">
 					<div
-						class="col-md-4 mb-4"
+						class="col-md-4 mb-4 fade-in"
 						th:each="category : ${categories}">
-						<div class="card h-100 shadow-sm">
+						<div class="card category-card h-100">
 							<div class="card-body text-center">
-								<i class="bi bi-laptop display-1 text-primary mb-3"></i>
+								<i class="bi bi-laptop category-icon display-1 mb-4"></i>
 								<h5
-									class="card-title"
-									th:text="${category.name}"></h5>
+									class="card-title fw-bold mb-3"
+									th:text="${category.name}">
+									Categoría
+								</h5>
 								<p
-									class="card-text"
-									th:text="${category.description}"></p>
+									class="card-text text-muted mb-4"
+									th:text="${category.description}">
+									Descripción de la categoría
+								</p>
 								<a
 									th:href="@{/web/products/category/{id}(id=${category.id})}"
-									class="btn btn-outline-primary"
-									>Ver Productos</a
-								>
+									class="btn btn-outline-primary">
+									<i class="bi bi-arrow-right me-2"></i>Ver Productos
+								</a>
 							</div>
 						</div>
 					</div>
@@ -144,98 +592,493 @@
 
 		<!-- Productos Destacados -->
 		<section
-			class="bg-light py-5"
+			class="section-padding"
 			th:if="${not #lists.isEmpty(featuredProducts)}">
 			<div class="container">
-				<h2 class="text-center mb-5">Productos Destacados</h2>
-				<div class="row">
+				<div class="text-center mb-5">
+					<h2 class="section-title">Productos Destacados</h2>
+					<p class="lead text-muted">Los productos más populares y mejor valorados</p>
+				</div>
+
+				<div class="row g-4">
 					<div
-						class="col-lg-3 col-md-6 mb-4"
+						class="col-lg-3 col-md-6 mb-4 fade-in"
 						th:each="product : ${featuredProducts}">
-						<div class="card h-100 shadow-sm">
-							<img
-								th:src="${product.detailProduct.imageUrl != null ? product.detailProduct.imageUrl : 'https://via.placeholder.com/300x200'}"
-								class="card-img-top"
-								style="height: 200px; object-fit: cover"
-								th:alt="${product.name}" />
-							<div class="card-body d-flex flex-column">
-								<h6
-									class="card-title"
-									th:text="${product.name}"></h6>
-								<p
-									class="card-text small text-muted"
-									th:text="${product.detailProduct.description}"></p>
-								<div class="mt-auto">
-									<div class="d-flex justify-content-between align-items-center">
-										<strong
-											class="text-primary"
-											th:text="'$' + ${product.detailProduct.price}"></strong>
-										<span
-											class="badge bg-success"
-											th:if="${product.stock > 0}"
-											>En Stock</span
-										>
-										<span
-											class="badge bg-danger"
-											th:if="${product.stock == 0}"
-											>Agotado</span
-										>
-									</div>
-									<a
-										th:href="@{/web/products/{id}(id=${product.id})}"
-										class="btn btn-primary btn-sm w-100 mt-2"
-										>Ver Detalles</a
+						<div class="card product-card h-100">
+							<div class="position-relative overflow-hidden">
+								<img
+									th:src="${product.detailProduct.imageUrl != null ? product.detailProduct.imageUrl : 'https://via.placeholder.com/300x250/e9ecef/6c757d?text=Producto'}"
+									class="card-img-top"
+									th:alt="${product.name}" />
+								<div class="position-absolute top-0 end-0 m-3">
+									<span
+										class="badge bg-danger"
+										th:if="${product.stock == 0}"
+										>Agotado</span
+									>
+									<span
+										class="badge bg-success"
+										th:if="${product.stock > 0}"
+										>Disponible</span
 									>
 								</div>
 							</div>
+
+							<div class="card-body d-flex flex-column">
+								<h6
+									class="card-title fw-bold mb-2"
+									th:text="${product.name}">
+									Producto
+								</h6>
+								<p
+									class="card-text text-muted small mb-3"
+									th:text="${product.detailProduct.description}">
+									Descripción del producto
+								</p>
+
+								<div class="mt-auto">
+									<div class="d-flex justify-content-between align-items-center mb-3">
+										<span
+											class="price-badge"
+											th:text="'$' + ${product.detailProduct.price}"
+											>$999</span
+										>
+										<small
+											class="text-muted"
+											th:if="${product.stock > 0}">
+											<i class="bi bi-check-circle-fill text-success me-1"></i>
+											<span th:text="${product.stock} + ' disponibles'">En stock</span>
+										</small>
+									</div>
+
+									<div class="d-grid gap-2">
+										<a
+											th:href="@{/web/products/{id}(id=${product.id})}"
+											class="btn btn-primary btn-sm">
+											<i class="bi bi-eye me-2"></i>Ver Detalles
+										</a>
+										<button
+											class="btn btn-outline-success btn-sm"
+											th:if="${product.stock > 0}">
+											<i class="bi bi-cart-plus me-2"></i>Agregar al Carrito
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
+					</div>
+				</div>
+
+				<div class="text-center mt-5">
+					<a
+						href="/products"
+						class="btn btn-outline-primary btn-lg">
+						<i class="bi bi-grid me-2"></i>Ver Todos los Productos
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section class="section-padding bg-gradient-light">
+			<div class="container">
+				<div class="row g-4">
+					<div class="col-md-3 text-center fade-in">
+						<div class="mb-3">
+							<i class="bi bi-truck display-4 text-primary"></i>
+						</div>
+						<h5 class="fw-bold">Envío Gratis</h5>
+						<p class="text-muted mb-0">En compras mayores a $100</p>
+					</div>
+					<div class="col-md-3 text-center fade-in">
+						<div class="mb-3">
+							<i class="bi bi-shield-check display-4 text-success"></i>
+						</div>
+						<h5 class="fw-bold">Garantía Total</h5>
+						<p class="text-muted mb-0">12 meses de garantía completa</p>
+					</div>
+					<div class="col-md-3 text-center fade-in">
+						<div class="mb-3">
+							<i class="bi bi-headset display-4 text-info"></i>
+						</div>
+						<h5 class="fw-bold">Soporte 24/7</h5>
+						<p class="text-muted mb-0">Atención personalizada siempre</p>
+					</div>
+					<div class="col-md-3 text-center fade-in">
+						<div class="mb-3">
+							<i class="bi bi-arrow-repeat display-4 text-warning"></i>
+						</div>
+						<h5 class="fw-bold">Devoluciones</h5>
+						<p class="text-muted mb-0">30 días para devolver tu compra</p>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Footer -->
-		<footer class="bg-dark text-white py-4">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<h5>ElectroStore</h5>
-						<p>Tu tienda de confianza para productos electrónicos.</p>
+		<footer class="footer section-padding">
+			<div class="container footer-content">
+				<div class="row g-4">
+					<div class="col-lg-4">
+						<h5 class="fw-bold mb-4"><i class="bi bi-cpu-fill text-warning me-2"></i>MODATEC</h5>
+						<p class="text-light mb-4">
+							Somos líderes en tecnología, ofreciendo los mejores productos electrónicos con calidad garantizada y servicio
+							excepcional.
+						</p>
+						<div class="social-links">
+							<a
+								href="#"
+								class="text-decoration-none">
+								<i class="bi bi-facebook"></i>
+							</a>
+							<a
+								href="#"
+								class="text-decoration-none">
+								<i class="bi bi-instagram"></i>
+							</a>
+							<a
+								href="#"
+								class="text-decoration-none">
+								<i class="bi bi-twitter"></i>
+							</a>
+							<a
+								href="#"
+								class="text-decoration-none">
+								<i class="bi bi-linkedin"></i>
+							</a>
+							<a
+								href="#"
+								class="text-decoration-none">
+								<i class="bi bi-youtube"></i>
+							</a>
+						</div>
 					</div>
-					<div class="col-md-6">
-						<h5>Enlaces</h5>
+
+					<div class="col-lg-2 col-md-6">
+						<h6 class="fw-bold mb-3">Navegación</h6>
 						<ul class="list-unstyled">
-							<li>
+							<li class="mb-2">
+								<a
+									href="/"
+									class="text-decoration-none">
+									<i class="bi bi-house me-2"></i>Inicio
+								</a>
+							</li>
+							<li class="mb-2">
 								<a
 									href="/products"
-									class="text-white-50"
-									>Productos</a
-								>
+									class="text-decoration-none">
+									<i class="bi bi-grid me-2"></i>Productos
+								</a>
 							</li>
-							<li>
-								<a
-									href="/orders"
-									class="text-white-50"
-									>Mis Pedidos</a
-								>
-							</li>
-							<li>
+							<li class="mb-2">
 								<a
 									href="/web/cart"
-									class="text-white-50"
-									>Carrito</a
-								>
+									class="text-decoration-none">
+									<i class="bi bi-bag me-2"></i>Carrito
+								</a>
+							</li>
+							<li class="mb-2">
+								<a
+									href="/orders"
+									class="text-decoration-none">
+									<i class="bi bi-box me-2"></i>Mis Pedidos
+								</a>
 							</li>
 						</ul>
 					</div>
+
+					<div class="col-lg-3 col-md-6">
+						<h6 class="fw-bold mb-3">Soporte</h6>
+						<ul class="list-unstyled">
+							<li class="mb-2">
+								<a
+									href="#"
+									class="text-decoration-none">
+									<i class="bi bi-question-circle me-2"></i>Preguntas Frecuentes
+								</a>
+							</li>
+							<li class="mb-2">
+								<a
+									href="#"
+									class="text-decoration-none">
+									<i class="bi bi-telephone me-2"></i>Contacto
+								</a>
+							</li>
+							<li class="mb-2">
+								<a
+									href="#"
+									class="text-decoration-none">
+									<i class="bi bi-shield me-2"></i>Garantía
+								</a>
+							</li>
+							<li class="mb-2">
+								<a
+									href="#"
+									class="text-decoration-none">
+									<i class="bi bi-arrow-repeat me-2"></i>Devoluciones
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-lg-3">
+						<h6 class="fw-bold mb-3">Newsletter</h6>
+						<p class="text-light mb-3">Recibe ofertas exclusivas y novedades</p>
+						<form class="row g-2">
+							<div class="col-12">
+								<div class="input-group">
+									<input
+										type="email"
+										class="form-control"
+										placeholder="tu@email.com"
+										style="border-radius: 25px 0 0 25px" />
+									<button
+										class="btn btn-warning"
+										type="submit"
+										style="border-radius: 0 25px 25px 0">
+										<i class="bi bi-send"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+
+						<div class="mt-4">
+							<h6 class="fw-bold mb-2">Medios de Pago</h6>
+							<div class="d-flex gap-2">
+								<i class="bi bi-credit-card-2-front fs-3 text-info"></i>
+								<i class="bi bi-paypal fs-3 text-primary"></i>
+								<i class="bi bi-bank fs-3 text-success"></i>
+							</div>
+						</div>
+					</div>
 				</div>
-				<hr />
-				<div class="text-center">
-					<p>&copy; 2025 ElectroStore. Todos los derechos reservados.</p>
+
+				<hr class="my-4 border-light opacity-25" />
+
+				<div class="row align-items-center">
+					<div class="col-md-6">
+						<p class="mb-0 text-light">&copy; 2025 MODATEC. Todos los derechos reservados.</p>
+					</div>
+					<div class="col-md-6 text-md-end">
+						<small class="text-light">
+							<a
+								href="#"
+								class="text-decoration-none me-3"
+								>Términos y Condiciones</a
+							>
+							<a
+								href="#"
+								class="text-decoration-none"
+								>Política de Privacidad</a
+							>
+						</small>
+					</div>
 				</div>
 			</div>
 		</footer>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<script>
+			// Smooth scrolling para enlaces internos
+			document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) {
+						target.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start',
+						});
+					}
+				});
+			});
+
+			// Animación de aparición en scroll
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -50px 0px',
+			};
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = '1';
+						entry.target.style.transform = 'translateY(0)';
+					}
+				});
+			}, observerOptions);
+
+			// Aplicar animación a elementos con clase fade-in
+			document.querySelectorAll('.fade-in').forEach((el) => {
+				el.style.opacity = '0';
+				el.style.transform = 'translateY(30px)';
+				el.style.transition = 'all 0.6s ease-out';
+				observer.observe(el);
+			});
+
+			// Contador animado para las estadísticas del hero
+			function animateCounters() {
+				const counters = document.querySelectorAll('.hero-content h3');
+				counters.forEach((counter) => {
+					const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+					const increment = target / 100;
+					let current = 0;
+
+					const timer = setInterval(() => {
+						current += increment;
+						if (current >= target) {
+							counter.textContent = counter.textContent.replace(/[0-9]+/, target);
+							clearInterval(timer);
+						} else {
+							counter.textContent = counter.textContent.replace(/[0-9]+/, Math.ceil(current));
+						}
+					}, 20);
+				});
+			}
+
+			// Ejecutar contador cuando la sección hero sea visible
+			const heroObserver = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						animateCounters();
+						heroObserver.unobserve(entry.target);
+					}
+				});
+			});
+
+			const heroSection = document.querySelector('.hero-section');
+			if (heroSection) {
+				heroObserver.observe(heroSection);
+			}
+
+			// Efecto de navbar al hacer scroll
+			window.addEventListener('scroll', function () {
+				const navbar = document.querySelector('.navbar');
+				if (window.scrollY > 50) {
+					navbar.style.background = 'linear-gradient(135deg, rgba(13, 110, 253, 0.95), rgba(0, 86, 179, 0.95))';
+					navbar.style.backdropFilter = 'blur(10px)';
+				} else {
+					navbar.style.background = 'linear-gradient(135deg, #0d6efd, #0056b3)';
+					navbar.style.backdropFilter = 'none';
+				}
+			});
+
+			// Tooltip para elementos con información adicional
+			const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+			const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+				return new bootstrap.Tooltip(tooltipTriggerEl);
+			});
+
+			// Funcionalidad para botón "Agregar al Carrito" (simulado)
+			document.querySelectorAll('.btn-outline-success').forEach((button) => {
+				button.addEventListener('click', function (e) {
+					e.preventDefault();
+
+					// Cambiar temporalmente el texto del botón
+					const originalText = this.innerHTML;
+					this.innerHTML = '<i class="bi bi-check me-2"></i>¡Agregado!';
+					this.classList.remove('btn-outline-success');
+					this.classList.add('btn-success');
+
+					// Actualizar contador del carrito (simulado)
+					const cartBadge = document.querySelector('.navbar .badge');
+					if (cartBadge) {
+						const currentCount = parseInt(cartBadge.textContent);
+						cartBadge.textContent = currentCount + 1;
+						cartBadge.classList.add('bg-danger');
+						cartBadge.classList.remove('bg-warning');
+					}
+
+					// Restaurar después de 2 segundos
+					setTimeout(() => {
+						this.innerHTML = originalText;
+						this.classList.remove('btn-success');
+						this.classList.add('btn-outline-success');
+					}, 2000);
+				});
+			});
+
+			// Efecto hover mejorado para cards de productos
+			document.querySelectorAll('.product-card').forEach((card) => {
+				card.addEventListener('mouseenter', function () {
+					this.style.transform = 'translateY(-15px)';
+				});
+
+				card.addEventListener('mouseleave', function () {
+					this.style.transform = 'translateY(0)';
+				});
+			});
+
+			// Validación simple del formulario de newsletter
+			const newsletterForm = document.querySelector('footer form');
+			if (newsletterForm) {
+				newsletterForm.addEventListener('submit', function (e) {
+					e.preventDefault();
+					const emailInput = this.querySelector('input[type="email"]');
+					const submitBtn = this.querySelector('button');
+
+					if (emailInput.value && emailInput.checkValidity()) {
+						// Simular envío exitoso
+						const originalBtnContent = submitBtn.innerHTML;
+						submitBtn.innerHTML = '<i class="bi bi-check"></i>';
+						submitBtn.classList.remove('btn-warning');
+						submitBtn.classList.add('btn-success');
+						emailInput.value = '';
+
+						// Mostrar mensaje temporal
+						const message = document.createElement('small');
+						message.className = 'text-success d-block mt-2';
+						message.textContent = '¡Suscripción exitosa!';
+						this.appendChild(message);
+
+						setTimeout(() => {
+							submitBtn.innerHTML = originalBtnContent;
+							submitBtn.classList.remove('btn-success');
+							submitBtn.classList.add('btn-warning');
+							message.remove();
+						}, 3000);
+					} else {
+						emailInput.classList.add('is-invalid');
+						setTimeout(() => {
+							emailInput.classList.remove('is-invalid');
+						}, 3000);
+					}
+				});
+			}
+
+			// Mejorar la experiencia de carga
+			window.addEventListener('load', function () {
+				document.body.classList.add('loaded');
+
+				// Inicializar tooltips de Bootstrap
+				const tooltips = document.querySelectorAll('[title]');
+				tooltips.forEach((tooltip) => {
+					new bootstrap.Tooltip(tooltip);
+				});
+			});
+
+			// Efecto parallax sutil para el hero
+			window.addEventListener('scroll', function () {
+				const heroSection = document.querySelector('.hero-section');
+				const scrolled = window.pageYOffset;
+				const parallax = scrolled * 0.5;
+
+				if (heroSection && scrolled < heroSection.offsetHeight) {
+					heroSection.style.transform = `translateY(${parallax}px)`;
+				}
+			});
+
+			// Mejorar accesibilidad con navegación por teclado
+			document.addEventListener('keydown', function (e) {
+				if (e.key === 'Tab') {
+					document.body.classList.add('keyboard-navigation');
+				}
+			});
+
+			document.addEventListener('mousedown', function () {
+				document.body.classList.remove('keyboard-navigation');
+			});
+		</script>
 	</body>
 </html>
