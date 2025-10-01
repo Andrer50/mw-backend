@@ -1,0 +1,16 @@
+# Configuración para redes corporativas/proxy
+
+# Si hay proxy HTTP, agregar estas propiedades a application.properties:
+# (Solo si se confirma que hay proxy)
+
+# Proxy HTTP
+spring.datasource.tomcat.connection-properties=useSSL=false;requireSSL=false
+
+# O configurar proxy en JVM (si es necesario)
+# -Dhttp.proxyHost=proxy.empresa.com
+# -Dhttp.proxyPort=8080
+# -Dhttps.proxyHost=proxy.empresa.com  
+# -Dhttps.proxyPort=8080
+
+# Para evitar proxy en conexiones directas:
+# -Dhttp.nonProxyHosts=*.supabase.co|localhost|127.0.0.1
