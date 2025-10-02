@@ -32,6 +32,7 @@ public class SecurityConfig {
                         // Thymeleaf web endpoints - públicos
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/web/products/**").permitAll()
+                        .requestMatchers("/web/categories/**").permitAll()
                         .requestMatchers("/web/auth/login", "/web/auth/register").permitAll()
                         
                         // Thymeleaf web endpoints - requieren autenticación

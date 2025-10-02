@@ -31,6 +31,8 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+
+
     // Relación con Product
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> productList;
