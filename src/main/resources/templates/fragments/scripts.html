@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<!-- Scripts al final del body -->
+		<div th:fragment="scripts(extraJs)">
+			<!-- Bootstrap JS -->
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+			<!-- jQuery (si lo necesitas) -->
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+			<!-- JavaScript global -->
+			<script th:src="@{/js/main.js}"></script>
+
+			<!-- JavaScript específico de página -->
+			<th:block th:if="${extraJs}">
+				<script
+					th:each="js : ${extraJs}"
+					th:src="@{${js}}"></script>
+			</th:block>
+		</div>
+	</body>
+</html>

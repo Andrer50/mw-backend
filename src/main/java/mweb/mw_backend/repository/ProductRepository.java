@@ -18,5 +18,14 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     @Query("SELECT p FROM Product p WHERE p.name LIKE %:search% OR p.detailProduct.description LIKE %:search%")
     Page<Product> findBySearchTerm(@Param("search") String search, Pageable pageable);
     
+    @Query("SELECT p FROM Product p WHERE p.category.id = :categoryId AND (p.name LIKE %:search% OR p.detailProduct.description LIKE %:search%)")
+    Page<Product> findByCategoryIdAndSearchTerm(@Param("categoryId") Long categoryId, @Param("search") String search, Pageable pageable);
+    
     List<Product> findTop8ByOrderByIdDesc(); // Productos más recientes
+    
+    // Métodos para contar
+    long countByCategoryId(Long categoryId);
+    
+    // Verificar existencia por código
+    boolean existsByCode(Long code);
 }
