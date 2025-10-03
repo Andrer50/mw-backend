@@ -7,6 +7,8 @@ import mweb.mw_backend.entity.Review;
 import mweb.mw_backend.repository.CategoryRepository;
 import mweb.mw_backend.service.ProductService;
 import mweb.mw_backend.service.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/web/products")
 public class ProductWebController extends BaseController {
+    
+    private static final Logger logger = LoggerFactory.getLogger(ProductWebController.class);
     
     private final ProductService productService;
     private final ReviewService reviewService;
@@ -38,36 +42,52 @@ public class ProductWebController extends BaseController {
                              @RequestParam(required = false) String search,
                              Model model) {
         
+        logger.info("=== PRODUCT LIST DEBUG ===");
+        logger.info("Parámetros recibidos - page: {}, size: {}, categoryId: {}, search: '{}'", 
+                   page, size, categoryId, search);
+        
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> products;
         
         // Filtrado combinado: categoría y búsqueda
         if (categoryId != null && search != null && !search.trim().isEmpty()) {
+            logger.info("Búsqueda por categoría y término: categoryId={}, search='{}'", categoryId, search);
             products = productService.searchProductsByCategory(categoryId, search, pageable);
             model.addAttribute("selectedCategoryId", categoryId);
             model.addAttribute("searchTerm", search);
         } else if (categoryId != null) {
+            logger.info("Búsqueda por categoría: categoryId={}", categoryId);
             products = productService.findProductsByCategory(categoryId, pageable);
             model.addAttribute("selectedCategoryId", categoryId);
         } else if (search != null && !search.trim().isEmpty()) {
+            logger.info("Búsqueda por término: search='{}'", search);
             products = productService.searchProducts(search, pageable);
             model.addAttribute("searchTerm", search);
         } else {
+            logger.info("Obteniendo todos los productos");
             products = productService.findAllProducts(pageable);
         }
+        
+        logger.info("Productos encontrados: {}", products != null ? products.getTotalElements() : "null");
+        logger.info("Páginas totales: {}", products != null ? products.getTotalPages() : "null");
+        logger.info("Contenido de la página actual: {}", 
+                   products != null && products.hasContent() ? products.getContent().size() : "sin contenido");
         
         // Información para la vista (las categorías ya se agregan automáticamente por BaseController)
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", products.getTotalPages());
-        model.addAttribute("totalElements", products.getTotalElements());
+        model.addAttribute("totalPages", products != null ? products.getTotalPages() : 0);
+        model.addAttribute("totalElements", products != null ? products.getTotalElements() : 0);
         model.addAttribute("pageSize", size);
         
         // Mantener parámetros para la paginación
         model.addAttribute("categoryParam", categoryId);
         model.addAttribute("searchParam", search);
         
-        return "products/list"; // templates/products/list.html
+        logger.info("=== MODELO FINAL ===");
+        logger.info("Template que se va a renderizar: products/list");
+        
+        return "products/list-clean"; // Cambiado para usar el template correcto
     }
 
     @GetMapping("/{id}")

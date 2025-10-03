@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+   <!-- Modal de Login -->
+   <div th:fragment="loginModal" class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white">
+               <h5 class="modal-title" id="loginModalLabel">
+                  <i class="bi bi-person-circle me-2"></i>Iniciar Sesión
+               </h5>
+               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body p-4">
+               <form th:action="@{/auth/login}" method="post" id="loginForm">
+                  <!-- Email -->
+                  <div class="mb-3">
+                     <label for="loginEmail" class="form-label">
+                        <i class="bi bi-envelope me-1"></i>Email
+                     </label>
+                     <input type="email" class="form-control" id="loginEmail" name="username" placeholder="tu@email.com"
+                        required>
+                  </div>
+
+                  <!-- Password -->
+                  <div class="mb-3">
+                     <label for="loginPassword" class="form-label">
+                        <i class="bi bi-lock me-1"></i>Contraseña
+                     </label>
+                     <div class="input-group">
+                        <input type="password" class="form-control" id="loginPassword" name="password"
+                           placeholder="Tu contraseña" required>
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                           <i class="bi bi-eye"></i>
+                        </button>
+                     </div>
+                  </div>
+
+                  <!-- Remember Me -->
+                  <div class="mb-3 form-check">
+                     <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
+                     <label class="form-check-label" for="rememberMe">
+                        Recordarme
+                     </label>
+                  </div>
+
+                  <!-- Error Message -->
+                  <div class="alert alert-danger d-none" id="loginError" role="alert">
+                     <i class="bi bi-exclamation-triangle me-2"></i>
+                     <span id="loginErrorMessage">Error en las credenciales</span>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="d-grid mb-3">
+                     <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                     </button>
+                  </div>
+
+                  <!-- Divider -->
+                  <hr class="my-4">
+
+                  <!-- Register Link -->
+                  <div class="text-center">
+                     <p class="text-muted mb-2">¿No tienes cuenta?</p>
+                     <a href="#" class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">
+                        <i class="bi bi-person-plus me-2"></i>Crear Cuenta
+                     </a>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+</body>
+
+</html>
