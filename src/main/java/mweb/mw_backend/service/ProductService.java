@@ -3,6 +3,8 @@ package mweb.mw_backend.service;
 import lombok.RequiredArgsConstructor;
 import mweb.mw_backend.entity.Product;
 import mweb.mw_backend.repository.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,13 +18,32 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class ProductService {
     
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
+    
     private final ProductRepository productRepository;
     
     /**
      * Obtiene todos los productos con paginación
      */
     public Page<Product> findAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        logger.info("=== PRODUCT SERVICE - findAllProducts ===");
+        logger.info("Request pageable: page={}, size={}", pageable.getPageNumber(), pageable.getPageSize());
+        
+        // Primero contar total de productos
+        long totalCount = productRepository.count();
+        logger.info("Total productos en BD: {}", totalCount);
+        
+        Page<Product> result = productRepository.findAll(pageable);
+        logger.info("Productos obtenidos: {} de {} totales", 
+                   result.getContent().size(), result.getTotalElements());
+        
+        if (result.hasContent()) {
+            logger.info("Primer producto: {}", result.getContent().get(0).getName());
+        } else {
+            logger.warn("No hay productos en la página solicitada");
+        }
+        
+        return result;
     }
     
     /**

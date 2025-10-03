@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
 	<!-- Fragment de Navbar Reutilizable -->
-	<nav th:fragment="navbar(activePage, categories, cartCount, isAuthenticated, username)" 
-		 class="navbar navbar-expand-lg navbar-dark sticky-top">
+	<nav th:fragment="navbar(activePage, categories, cartCount, isAuthenticated, username)"
+		class="navbar navbar-expand-lg navbar-dark sticky-top">
 		<div class="container">
 			<!-- Brand -->
 			<a class="navbar-brand" th:href="@{/}">
@@ -11,13 +12,8 @@
 			</a>
 
 			<!-- Mobile Toggle -->
-			<button class="navbar-toggler border-0" 
-					type="button" 
-					data-bs-toggle="collapse" 
-					data-bs-target="#navbarNav"
-					aria-controls="navbarNav" 
-					aria-expanded="false" 
-					aria-label="Toggle navigation">
+			<button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -27,40 +23,35 @@
 				<ul class="navbar-nav me-auto">
 					<!-- Home -->
 					<li class="nav-item">
-						<a class="nav-link" 
-						   th:href="@{/}"
-						   th:classappend="${activePage == 'home'} ? 'active' : ''">
+						<a class="nav-link" th:href="@{/}" th:classappend="${activePage == 'home'} ? 'active' : ''">
 							<i class="bi bi-house me-1"></i>Inicio
 						</a>
 					</li>
-					
+
 					<!-- Products -->
 					<li class="nav-item">
-						<a class="nav-link" 
-						   th:href="@{/web/products}"
-						   th:classappend="${activePage == 'products'} ? 'active' : ''">
+						<a class="nav-link" th:href="@{/web/products}"
+							th:classappend="${activePage == 'products'} ? 'active' : ''">
 							<i class="bi bi-grid me-1"></i>Productos
 						</a>
 					</li>
-					
+
 					<!-- Categories Dropdown -->
 					<li class="nav-item dropdown" th:if="${categories != null and !categories.empty}">
-						<a class="nav-link dropdown-toggle" 
-						   href="#" 
-						   role="button" 
-						   data-bs-toggle="dropdown" 
-						   aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
 							<i class="bi bi-list me-1"></i>Categorías
 						</a>
 						<ul class="dropdown-menu">
 							<li th:each="category : ${categories}">
-								<a class="dropdown-item" 
-								   th:href="@{/web/products/category/{id}(id=${category.id})}"
-								   th:text="${category.name}">
+								<a class="dropdown-item" th:href="@{/web/products/category/{id}(id=${category.id})}"
+									th:text="${category.name}">
 									Categoría
 								</a>
 							</li>
-							<li><hr class="dropdown-divider"></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
 							<li>
 								<a class="dropdown-item" th:href="@{/web/products}">
 									<i class="bi bi-arrow-right me-2"></i>Ver Todas
@@ -74,12 +65,10 @@
 				<ul class="navbar-nav">
 					<!-- Cart -->
 					<li class="nav-item">
-						<a class="nav-link" 
-						   th:href="@{/web/cart}"
-						   th:classappend="${activePage == 'cart'} ? 'active' : ''">
+						<a class="nav-link" th:href="@{/web/cart}" th:classappend="${activePage == 'cart'} ? 'active' : ''">
 							<i class="bi bi-bag me-1"></i>Carrito
-							<span class="badge bg-warning text-dark ms-1" 
-								  th:text="${cartCount != null ? cartCount : 0}">0</span>
+							<span class="badge bg-warning text-dark ms-1"
+								th:text="${cartCount != null ? cartCount : 0}">0</span>
 						</a>
 					</li>
 
@@ -87,16 +76,14 @@
 					<th:block th:if="${isAuthenticated == null or !isAuthenticated}">
 						<!-- Not Authenticated -->
 						<li class="nav-item">
-							<a class="nav-link" 
-							   th:href="@{/auth/login}"
-							   th:classappend="${activePage == 'login'} ? 'active' : ''">
-								<i class="bi bi-person me-1"></i>Iniciar Sesión
+							<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+								th:classappend="${activePage == 'login'} ? 'active' : ''">
+								<i class="bi bi-person me-1"></i> Iniciar Sesión
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" 
-							   th:href="@{/auth/register}"
-							   th:classappend="${activePage == 'register'} ? 'active' : ''">
+							<a class="nav-link" data-bs-toggle="modal" data-bs-target="#registerModal"
+								th:classappend="${activePage == 'register'} ? 'active' : ''">
 								<i class="bi bi-person-plus me-1"></i>Registrarse
 							</a>
 						</li>
@@ -105,11 +92,8 @@
 					<th:block th:if="${isAuthenticated != null and isAuthenticated}">
 						<!-- Authenticated User Menu -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" 
-							   href="#" 
-							   role="button" 
-							   data-bs-toggle="dropdown" 
-							   aria-expanded="false">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+								aria-expanded="false">
 								<i class="bi bi-person-circle me-1"></i>
 								<span th:text="${username != null ? username : 'Usuario'}">Usuario</span>
 							</a>
@@ -124,7 +108,9 @@
 										<i class="bi bi-box me-2"></i>Mis Pedidos
 									</a>
 								</li>
-								<li><hr class="dropdown-divider"></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
 								<li>
 									<form th:action="@{/auth/logout}" method="post" class="m-0">
 										<button type="submit" class="dropdown-item text-danger">
@@ -139,5 +125,8 @@
 			</div>
 		</div>
 	</nav>
+
+
 </body>
+
 </html>

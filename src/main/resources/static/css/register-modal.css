@@ -1,87 +1,3 @@
-/* Estilos globales de la aplicación */
-:root {
-	--primary-color: #0d6efd;
-	--secondary-color: #6c757d;
-	--success-color: #198754;
-	--info-color: #0dcaf0;
-	--warning-color: #ffc107;
-	--danger-color: #dc3545;
-	--light-color: #f8f9fa;
-	--dark-color: #212529;
-}
-
-/* Mejoras generales */
-body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	line-height: 1.6;
-}
-
-/* Utilidades globales */
-.shadow-hover {
-	transition: box-shadow 0.3s ease-in-out;
-}
-
-.shadow-hover:hover {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
-}
-
-.text-truncate-2 {
-	display: -webkit-box;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-.text-truncate-3 {
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-/* Animaciones globales */
-.fade-in {
-	animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-/* Navbar mejorado */
-.navbar {
-	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-	padding: 1rem 0;
-	background: linear-gradient(135deg, var(--primary-color), #0056b3) !important;
-}
-
-.navbar-brand {
-	font-weight: 700;
-	font-size: 1.8rem;
-	color: white !important;
-}
-
-.navbar-nav .nav-link {
-	font-weight: 500;
-	color: rgba(255, 255, 255, 0.9) !important;
-	margin: 0 0.5rem;
-	padding: 0.5rem 1rem !important;
-	border-radius: 25px;
-	transition: all 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-	background: rgba(255, 255, 255, 0.2);
-	color: white !important;
-	transform: translateY(-2px);
-}
-
-/* ===== MODAL DE REGISTRO ===== */
 .register-modal .modal-content {
 	border-radius: 20px;
 	border: none;
@@ -89,7 +5,7 @@ body {
 }
 
 .register-modal .modal-header {
-	background: linear-gradient(135deg, var(--primary-color) 0%, var(--warning-color) 100%);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	border: none;
 	padding: 1.75rem 2rem;
 }
@@ -97,7 +13,6 @@ body {
 .register-modal .modal-title {
 	font-size: 1.5rem;
 	font-weight: 600;
-	color: white;
 }
 
 .register-modal .modal-body {
@@ -158,7 +73,7 @@ body {
 }
 
 .register-modal .btn-register-submit {
-	background: linear-gradient(135deg, var(--primary-color) 0%, var(--warning-color) 100%);
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	border: none;
 	border-radius: 10px;
 	padding: 0.875rem 2rem;
@@ -189,36 +104,6 @@ body {
 	border-color: #6c757d;
 }
 
-.register-modal .benefits-box {
-	background: white;
-	border-radius: 15px;
-	padding: 1.5rem;
-	margin-bottom: 1.5rem;
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.register-modal .benefit-item {
-	display: flex;
-	align-items: center;
-	margin-bottom: 0.75rem;
-}
-
-.register-modal .benefit-item:last-child {
-	margin-bottom: 0;
-}
-
-.register-modal .benefit-item i {
-	color: #667eea;
-	font-size: 1.25rem;
-	margin-right: 0.75rem;
-}
-
-.register-modal .benefit-item span {
-	color: #495057;
-	font-size: 0.9rem;
-}
-
-/* Validación de contraseña */
 .register-modal .password-strength {
 	height: 4px;
 	background: #e9ecef;
@@ -254,7 +139,35 @@ body {
 	margin-top: 0.25rem;
 }
 
-/* Responsive para modal de registro */
+.register-modal .benefits-box {
+	background: white;
+	border-radius: 15px;
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.register-modal .benefit-item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.75rem;
+}
+
+.register-modal .benefit-item:last-child {
+	margin-bottom: 0;
+}
+
+.register-modal .benefit-item i {
+	color: #667eea;
+	font-size: 1.25rem;
+	margin-right: 0.75rem;
+}
+
+.register-modal .benefit-item span {
+	color: #495057;
+	font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
 	.register-modal .modal-body {
 		padding: 1.5rem;

@@ -1,5 +1,8 @@
 package mweb.mw_backend.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -40,11 +43,6 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull(message = "No puede ser nulo")
-    @NotBlank(message = "No puede estar en blanco")
-    @Column(name = "stock", nullable = false)
-    private Long stock;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -52,8 +50,7 @@ public class Product {
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private DetailProduct detailProduct;
 
-    // TODO: Descomentar cuando se implementen estas entidades
-    /*
+
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Inventory inventory;
 
@@ -62,5 +59,17 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Wishlist> wishlists = new ArrayList<>();
-    */
+
+    // Métodos de conveniencia
+    public Long getStock() {
+        return inventory != null ? inventory.getCurrentStock() : 0L;
+    }
+
+    public boolean hasStock() {
+        return getStock() > 0;
+    }
+
+    public boolean isLowStock() {
+        return getStock() <= 5 && getStock() > 0;
+    }
 }
