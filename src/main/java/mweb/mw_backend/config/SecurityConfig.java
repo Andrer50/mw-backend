@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers("/web/products/**").permitAll()
                         .requestMatchers("/web/categories/**").permitAll()
                         .requestMatchers("/web/auth/login", "/web/auth/register").permitAll()
+                        .requestMatchers("/dashboard/**").permitAll() // Dashboard estático
                         
                         // Thymeleaf web endpoints - requieren autenticación
                         .requestMatchers("/web/cart/**").authenticated()
