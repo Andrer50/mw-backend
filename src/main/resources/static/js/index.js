@@ -226,3 +226,77 @@ document.addEventListener('keydown', function (e) {
 document.addEventListener('mousedown', function () {
 	document.body.classList.remove('keyboard-navigation');
 });
+
+function renderProductos() {
+	const contenedor = document.getElementById('listaProductos');
+	contenedor.innerHTML = '';
+	productos.forEach((p) => {
+		const div = document.createElement('div');
+		div.className = 'producto';
+		div.innerHTML = `
+          <img src="${p.img}" alt="${p.nombre}" />
+          <h3>${p.nombre}</h3>
+          <p>S/ ${p.precio}</p>
+          <button onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
+        `;
+		contenedor.appendChild(div);
+	});
+}
+
+function agregarAlCarrito(id) {
+	const prod = productos.find((p) => p.id === id);
+	carrito.push(prod);
+	actualizarIconoCarrito();
+}
+
+function abrirCarrito() {
+	document.getElementById('carritoModal').style.display = 'block';
+	const lista = document.getElementById('listaCarrito');
+	lista.innerHTML = '';
+	let total = 0;
+	carrito.forEach((p) => {
+		const li = document.createElement('li');
+		li.textContent = `${p.nombre} - S/ ${p.precio}`;
+		total += p.precio;
+		lista.appendChild(li);
+	});
+	document.getElementById('totalCarrito').innerText = total.toFixed(2);
+}
+
+function actualizarIconoCarrito() {
+	const icono = document.getElementById('iconoCarrito');
+	icono.setAttribute('data-count', carrito.length);
+}
+
+function cerrarCarrito() {
+	document.getElementById('carritoModal').style.display = 'none';
+}
+
+function abrirRegistro() {
+	document.getElementById('registroModal').style.display = 'block';
+}
+
+function cerrarRegistro() {
+	document.getElementById('registroModal').style.display = 'none';
+}
+
+// Proxy para verificar autenticación antes de pagar
+const servicioPago = {
+	procesarPago: () => alert('✅ Pago realizado con éxito.'),
+};
+
+const proxyPago = {
+	pagar: () => {
+		if (!usuario.autenticado) {
+			alert('🔒 Debes iniciar sesión para pagar.');
+			return;
+		}
+		servicioPago.procesarPago();
+	},
+};
+
+function pagar() {
+	proxyPago.pagar();
+}
+
+renderProductos();
