@@ -1,420 +1,330 @@
 <!DOCTYPE html>
-<html
-	lang="en"
-	xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="fragments/head :: head('Dashboard', '/css/dashboard.css', '/js/dashboard.js')"></head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-	<body>
-		<div class="d-flex">
-			<!-- SIDEBAR -->
-			<div
-				id="sidebar-container"
-				class="bg-primary d-flex flex-column">
-				<div class="logo">
-					<h3 class="text-light font-weight-bold">MODATEC</h3>
-				</div>
-				<div class="menu">
-					<a
-						href="#"
-						onclick="mostrarSeccion('tablero')"
-						class="d-block text-light p-3">
-						<i class="icon ion-md-apps me-2 lead"></i> Tablero
-					</a>
-					<a
-						href="#"
-						onclick="mostrarSeccion('perfil')"
-						class="d-block text-light p-3">
-						<i class="icon ion-md-person me-2 lead"></i> Perfil
-					</a>
-					<a
-						href="#"
-						onclick="mostrarSeccion('usuarios')"
-						class="d-block text-light p-3">
-						<i class="icon ion-md-people me-2 lead"></i> Usuarios
-					</a>
-					<a
-						href="#"
-						onclick="mostrarSeccion('productos')"
-						class="d-block text-light p-3">
-						<i class="icon ion-md-podium me-2 lead"></i> Productos
-					</a>
-					<a
-						href="#"
-						onclick="mostrarSeccion('categorias')"
-						class="d-block text-light p-3">
-						<i class="icon ion-md-basket me-2 lead"></i> Categorias
-					</a>
-				</div>
-				<div class="p-3 mt-auto text-center">
-					<a
-						href="#"
-						id="theme-toggle-btn"
-						class="d-block text-light p-3"
-						style="border-radius: 50%">
-						<i
-							id="theme-toggle-icon"
-							class="icon ion-md-sunny lead"></i>
-					</a>
-				</div>
+<head th:replace="fragments/head :: head('Dashboard', '/css/dashboard.css', '/js/dashboard.js')"></head>
+
+<body>
+	<div class="d-flex">
+		<!-- SIDEBAR -->
+		<div id="sidebar-container" class="bg-primary d-flex flex-column">
+			<div class="logo">
+				<a class="navbar-brand text-[0.6rem]" th:href="@{/}">
+					<i class="bi bi-cpu-fill  "></i>MODATEC
+				</a>
 			</div>
+			<div class="menu">
+				<a href="#" onclick="mostrarSeccion('tablero')" class="d-block text-light p-3">
+					<i class="icon ion-md-apps me-2 lead"></i> Tablero
+				</a>
+				<a href="#" onclick="mostrarSeccion('perfil')" class="d-block text-light p-3">
+					<i class="icon ion-md-person me-2 lead"></i> Perfil
+				</a>
+				<a href="#" onclick="mostrarSeccion('usuarios')" class="d-block text-light p-3">
+					<i class="icon ion-md-people me-2 lead"></i> Usuarios
+				</a>
+				<a href="#" onclick="mostrarSeccion('productos')" class="d-block text-light p-3">
+					<i class="icon ion-md-podium me-2 lead"></i> Productos
+				</a>
+				<a href="#" onclick="mostrarSeccion('categorias')" class="d-block text-light p-3">
+					<i class="icon ion-md-basket me-2 lead"></i> Categorias
+				</a>
+			</div>
+			<div class="p-3 mt-auto text-center">
+				<a href="#" id="theme-toggle-btn" class="d-block text-light p-3" style="border-radius: 50%">
+					<i id="theme-toggle-icon" class="icon ion-md-sunny lead"></i>
+				</a>
+			</div>
+		</div>
 
-			<!-- CONTENIDO PRINCIPAL -->
-			<div
-				class="w-100"
-				id="main-content">
-				<!-- NAVBAR -->
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<div class="container-fluid">
-						<button
-							class="navbar-toggler"
-							type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent"
-							aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
+		<!-- CONTENIDO PRINCIPAL -->
+		<div class="w-100" id="main-content">
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
 
-						<form class="d-flex my-2 d-inline-block">
-							<div
-								class="input-group"
-								style="max-width: 300px">
-								<input
-									class="form-control"
-									type="search"
-									placeholder="Buscar"
-									aria-label="Buscar" />
-								<span class="input-group-text">
-									<button
-										class="btn"
-										type="submit"
-										style="padding: 0; border: none; background: transparent">
-										<i class="icon ion-md-search"></i>
-									</button>
-								</span>
-							</div>
-						</form>
-
-						<div
-							class="collapse navbar-collapse"
-							id="navbarSupportedContent">
-							<ul class="navbar-nav ms-auto">
-								<li class="nav-item dropdown">
-									<a
-										class="user-info nav-link dropdown-toggle"
-										href="#"
-										id="navbarDropdown"
-										role="button"
-										data-bs-toggle="dropdown"
-										aria-expanded="false">
-										<img
-											th:src="@{/imagen/SS.png}"
-											class="img-fluid rounded-circle avatar mr-2"
-											onerror="this.src='https://via.placeholder.com/35'"
-											alt="Avatar" />
-										Daniel de la Cruz
-									</a>
-									<ul
-										class="dropdown-menu"
-										aria-labelledby="navbarDropdown">
-										<li>
-											<a
-												class="dropdown-item"
-												href="#"
-												>Perfil</a
-											>
-										</li>
-										<li>
-											<a
-												class="dropdown-item"
-												href="#"
-												>Suscripciones</a
-											>
-										</li>
-										<li><hr class="dropdown-divider" /></li>
-										<li>
-											<a
-												class="dropdown-item"
-												href="#"
-												>Cerrar sesión</a
-											>
-										</li>
-									</ul>
-								</li>
-							</ul>
+					<form class="d-flex my-2 d-inline-block">
+						<div class="input-group" style="max-width: 300px">
+							<input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar" />
+							<span class="input-group-text">
+								<button class="btn" type="submit" style="padding: 0; border: none; background: transparent">
+									<i class="icon ion-md-search"></i>
+								</button>
+							</span>
 						</div>
-					</div>
-				</nav>
+					</form>
 
-				<!-- ÁREA DE CONTENIDO -->
-				<div class="container-fluid main-content-area">
-					<!-- TABLERO -->
-					<div
-						id="tablero"
-						class="content-section">
-						<div class="row">
-							<div class="col-md-3">
-								<div class="card text-white bg-primary mb-3">
-									<div class="card-body">
-										<h5>Ventas Hoy</h5>
-										<p class="fs-4">S/ 3,500</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card text-white bg-success mb-3">
-									<div class="card-body">
-										<h5>Pedidos</h5>
-										<p class="fs-4">120</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card text-white bg-warning mb-3">
-									<div class="card-body">
-										<h5>Clientes Nuevos</h5>
-										<p class="fs-4">15</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="card text-white bg-danger mb-3">
-									<div class="card-body">
-										<h5>Stock Bajo</h5>
-										<p class="fs-4">8</p>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- GRÁFICO DE VENTAS -->
-						<div class="card my-4">
-							<div class="card-body">
-								<h5>Ventas Mensuales</h5>
-								<canvas
-									id="ventasChart"
-									height="100"></canvas>
-							</div>
-						</div>
-
-						<!-- ÚLTIMOS PEDIDOS -->
-						<div class="card my-4">
-							<div class="card-body">
-								<h5>Últimos Pedidos</h5>
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Cliente</th>
-											<th>Fecha</th>
-											<th>Monto</th>
-											<th>Estado</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>#1001</td>
-											<td>Juan Pérez</td>
-											<td>02/10/2025</td>
-											<td>S/ 1200</td>
-											<td><span class="badge bg-success">Completado</span></td>
-										</tr>
-										<tr>
-											<td>#1002</td>
-											<td>Ana López</td>
-											<td>02/10/2025</td>
-											<td>S/ 650</td>
-											<td><span class="badge bg-warning text-dark">Pendiente</span></td>
-										</tr>
-										<tr>
-											<td>#1003</td>
-											<td>Carlos Torres</td>
-											<td>01/10/2025</td>
-											<td>S/ 2000</td>
-											<td><span class="badge bg-danger">Cancelado</span></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<!-- PERFIL -->
-					<div
-						id="perfil"
-						class="content-section"
-						style="display: none">
-						<div class="card">
-							<div class="card-body">
-								<h5>Perfil de Usuario</h5>
-								<form>
-									<div class="mb-3">
-										<label class="form-label">Nombre</label>
-										<input
-											type="text"
-											class="form-control"
-											value="Daniel de la Cruz" />
-									</div>
-									<div class="mb-3">
-										<label class="form-label">Email</label>
-										<input
-											type="email"
-											class="form-control"
-											value="daniel@correo.com" />
-									</div>
-									<div class="mb-3">
-										<label class="form-label">Contraseña</label>
-										<input
-											type="password"
-											class="form-control"
-											value="123456" />
-									</div>
-									<button
-										type="button"
-										class="btn btn-primary">
-										Actualizar
-									</button>
-								</form>
-							</div>
-						</div>
-					</div>
-
-					<!-- USUARIOS -->
-					<div
-						id="usuarios"
-						class="content-section"
-						style="display: none">
-						<div class="card">
-							<div class="card-body">
-								<h5>Gestión de Usuarios</h5>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Nombre</th>
-											<th>Email</th>
-											<th>Rol</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Juan Pérez</td>
-											<td>juan@mail.com</td>
-											<td>Admin</td>
-											<td>
-												<button class="btn btn-sm btn-warning">Editar</button>
-												<button class="btn btn-sm btn-danger">Eliminar</button>
-											</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Ana López</td>
-											<td>ana@mail.com</td>
-											<td>Cliente</td>
-											<td>
-												<button class="btn btn-sm btn-warning">Editar</button>
-												<button class="btn btn-sm btn-danger">Eliminar</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<!-- PRODUCTOS -->
-					<div
-						id="productos"
-						class="content-section"
-						style="display: none">
-						<div class="card">
-							<div class="card-body">
-								<h5>Gestión de Productos</h5>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Producto</th>
-											<th>Categoría</th>
-											<th>Precio</th>
-											<th>Stock</th>
-											<th>Acciones</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>101</td>
-											<td>Camisa</td>
-											<td>Ropa</td>
-											<td>S/ 80</td>
-											<td>25</td>
-											<td>
-												<button class="btn btn-sm btn-warning">Editar</button>
-												<button class="btn btn-sm btn-danger">Eliminar</button>
-											</td>
-										</tr>
-										<tr>
-											<td>102</td>
-											<td>Zapatillas</td>
-											<td>Calzado</td>
-											<td>S/ 200</td>
-											<td>10</td>
-											<td>
-												<button class="btn btn-sm btn-warning">Editar</button>
-												<button class="btn btn-sm btn-danger">Eliminar</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<!-- CATEGORÍAS -->
-					<div
-						id="categorias"
-						class="content-section"
-						style="display: none">
-						<div class="card">
-							<div class="card-body">
-								<h5>Gestión de Categorías</h5>
-								<ul class="list-group">
-									<li class="list-group-item d-flex justify-content-between align-items-center">
-										PC <button class="btn btn-sm btn-danger">Eliminar</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ms-auto">
+							<li class="nav-item dropdown">
+								<a class="user-info nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									<img th:src="@{/imagen/SS.png}" class="img-fluid rounded-circle avatar mr-2"
+										onerror="this.src='https://via.placeholder.com/35'" alt="Avatar" />
+									Daniel de la Cruz
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li>
+										<a class="dropdown-item" href="#">Perfil</a>
 									</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center">
-										Laptop <button class="btn btn-sm btn-danger">Eliminar</button>
+									<li>
+										<a class="dropdown-item" href="#">Suscripciones</a>
 									</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center">
-										Celulares <button class="btn btn-sm btn-danger">Eliminar</button>
+									<li>
+										<hr class="dropdown-divider" />
 									</li>
-									<li class="list-group-item d-flex justify-content-between align-items-center">
-										Accesorios <button class="btn btn-sm btn-danger">Eliminar</button>
+									<li>
+										<a class="dropdown-item" href="#">Cerrar sesión</a>
 									</li>
 								</ul>
-								<button class="btn btn-primary mt-3">Añadir Categoría</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- ÁREA DE CONTENIDO -->
+			<div class="container-fluid main-content-area">
+				<!-- TABLERO -->
+				<div id="tablero" class="content-section">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="card text-white bg-primary mb-3">
+								<div class="card-body">
+									<h5>Ventas Hoy</h5>
+									<p class="fs-4">S/ 3,500</p>
+								</div>
 							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card text-white bg-success mb-3">
+								<div class="card-body">
+									<h5>Pedidos</h5>
+									<p class="fs-4">120</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card text-white bg-warning mb-3">
+								<div class="card-body">
+									<h5>Clientes Nuevos</h5>
+									<p class="fs-4">15</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="card text-white bg-danger mb-3">
+								<div class="card-body">
+									<h5>Stock Bajo</h5>
+									<p class="fs-4">8</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- GRÁFICO DE VENTAS -->
+					<div class="card my-4">
+						<div class="card-body">
+							<h5>Ventas Mensuales</h5>
+							<canvas id="ventasChart" height="100"></canvas>
+						</div>
+					</div>
+
+					<!-- ÚLTIMOS PEDIDOS -->
+					<div class="card my-4">
+						<div class="card-body">
+							<h5>Últimos Pedidos</h5>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Cliente</th>
+										<th>Fecha</th>
+										<th>Monto</th>
+										<th>Estado</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>#1001</td>
+										<td>Juan Pérez</td>
+										<td>02/10/2025</td>
+										<td>S/ 1200</td>
+										<td><span class="badge bg-success">Completado</span></td>
+									</tr>
+									<tr>
+										<td>#1002</td>
+										<td>Ana López</td>
+										<td>02/10/2025</td>
+										<td>S/ 650</td>
+										<td><span class="badge bg-warning text-dark">Pendiente</span></td>
+									</tr>
+									<tr>
+										<td>#1003</td>
+										<td>Carlos Torres</td>
+										<td>01/10/2025</td>
+										<td>S/ 2000</td>
+										<td><span class="badge bg-danger">Cancelado</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- PERFIL -->
+				<div id="perfil" class="content-section" style="display: none">
+					<div class="card">
+						<div class="card-body">
+							<h5>Perfil de Usuario</h5>
+							<form>
+								<div class="mb-3">
+									<label class="form-label">Nombre</label>
+									<input type="text" class="form-control" value="Daniel de la Cruz" />
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Email</label>
+									<input type="email" class="form-control" value="daniel@correo.com" />
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Contraseña</label>
+									<input type="password" class="form-control" value="123456" />
+								</div>
+								<button type="button" class="btn btn-primary">
+									Actualizar
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- USUARIOS -->
+				<div id="usuarios" class="content-section" style="display: none">
+					<div class="card">
+						<div class="card-body">
+							<h5>Gestión de Usuarios</h5>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nombre</th>
+										<th>Email</th>
+										<th>Rol</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>Juan Pérez</td>
+										<td>juan@mail.com</td>
+										<td>Admin</td>
+										<td>
+											<button class="btn btn-sm btn-warning">Editar</button>
+											<button class="btn btn-sm btn-danger">Eliminar</button>
+										</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>Ana López</td>
+										<td>ana@mail.com</td>
+										<td>Cliente</td>
+										<td>
+											<button class="btn btn-sm btn-warning">Editar</button>
+											<button class="btn btn-sm btn-danger">Eliminar</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- PRODUCTOS -->
+				<div id="productos" class="content-section" style="display: none">
+					<div class="card">
+						<div class="card-body">
+							<h5>Gestión de Productos</h5>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Producto</th>
+										<th>Categoría</th>
+										<th>Precio</th>
+										<th>Stock</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>101</td>
+										<td>Camisa</td>
+										<td>Ropa</td>
+										<td>S/ 80</td>
+										<td>25</td>
+										<td>
+											<button class="btn btn-sm btn-warning">Editar</button>
+											<button class="btn btn-sm btn-danger">Eliminar</button>
+										</td>
+									</tr>
+									<tr>
+										<td>102</td>
+										<td>Zapatillas</td>
+										<td>Calzado</td>
+										<td>S/ 200</td>
+										<td>10</td>
+										<td>
+											<button class="btn btn-sm btn-warning">Editar</button>
+											<button class="btn btn-sm btn-danger">Eliminar</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- CATEGORÍAS -->
+				<div id="categorias" class="content-section" style="display: none">
+					<div class="card">
+						<div class="card-body">
+							<h5>Gestión de Categorías</h5>
+							<ul class="list-group">
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									PC <button class="btn btn-sm btn-danger">Eliminar</button>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Laptop <button class="btn btn-sm btn-danger">Eliminar</button>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Celulares <button class="btn btn-sm btn-danger">Eliminar</button>
+								</li>
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Accesorios <button class="btn btn-sm btn-danger">Eliminar</button>
+								</li>
+							</ul>
+							<button class="btn btn-primary mt-3">Añadir Categoría</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Chart.js CDN para el gráfico de ventas -->
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<!-- Chart.js CDN para el gráfico de ventas -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-		<!-- Ionicons para los iconos -->
-		<script
-			type="module"
-			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-		<script
-			nomodule
-			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<!-- Ionicons para los iconos -->
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-		<!-- Scripts comunes (Bootstrap, jQuery, etc.) -->
-		<div th:replace="fragments/scripts :: scripts(${['/js/dashboard.js']})"></div>
-	</body>
+	<!-- Scripts comunes (Bootstrap, jQuery, etc.) -->
+	<div th:replace="fragments/scripts :: scripts(${['/js/dashboard.js']})"></div>
+</body>
+
 </html>

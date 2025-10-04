@@ -1,8 +1,3 @@
-:root {
-	--primary-color: #3734db;
-	--light: #ffffff;
-	--grey: #efefef;
-}
 body {
 	overflow-x: hidden;
 	font-family: 'Muli', sans-serif;
@@ -63,7 +58,7 @@ body.dark-mode .form-control {
 	bottom: 0;
 	left: 0;
 	z-index: 1000;
-	height: 100vh;
+	height: 100%;
 
 	/* DEFINIMOS UN ANCHO FIJO */
 	width: 200px; /* ¡Asegúrate que este valor sea el real! */
@@ -80,7 +75,6 @@ body.dark-mode .form-control {
 #main-content {
 	/* El margen izquierdo debe ser igual al ancho de la sidebar */
 	margin-left: 200px;
-	padding-top: 15px; /* Pequeño espacio superior opcional */
 }
 .logo {
 	text-align: center;
